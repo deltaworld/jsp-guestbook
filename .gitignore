@@ -1,0 +1,8 @@
+build/
+build/web/
+nbproject/
+src/conf/
+
+# netbeans
+/nbproject
+/dist/
