@@ -9,9 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Delete a Guestbook Entry</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <form action="" method="GET">
+        <label for="fname">First Name</label>
+            <input type="text" name="fname" id="fname" /><br>
+            <label for="sname">Last Name</label>
+            <input type="text" name="sname" id="sname" /><br>
+            <label for="email">email</label>
+            <input type="email" name="email" id="email" /><br>
+            <input type="submit"/>
+            </form>
+
     </body>
 </html>
