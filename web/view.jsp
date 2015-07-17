@@ -44,6 +44,6 @@
 </tr>
 </c:forEach>
 </table>
-            <a href="index.html">Go Back</a>
+<a href="index.html">Go Back</a>
 </body>
 </html>
