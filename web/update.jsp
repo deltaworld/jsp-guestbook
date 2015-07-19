@@ -22,8 +22,8 @@
         
         Please Enter your email address to update record
             <form action="update.jsp" method="GET">
-            <label for="fname">email address:</label>
-            <input type="text" name="email" id="fname" />
+            <label for="email">email address:</label>
+            <input type="text" name="email" id="email" />
             <input type="submit"/><br/>
             <a href="index.html">Go Back</a>
         </form>

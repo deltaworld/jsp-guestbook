@@ -18,15 +18,51 @@
         <title>Delete a Guestbook Entry</title>
     </head>
     <body>
-        <form action="" method="GET">
-        <label for="fname">First Name</label>
-            <input type="text" name="fname" id="fname" /><br>
-            <label for="sname">Last Name</label>
-            <input type="text" name="sname" id="sname" /><br>
-            <label for="email">email</label>
-            <input type="email" name="email" id="email" /><br>
-            <input type="submit"/>
+<h1>Delete a Record</h1>
+        
+        Please Enter the email address of the record you wish to delete
+            <form action="delete.jsp" method="GET">
+            <label for="email">email address:</label>
+            <input type="text" name="email" id="email" />
+            <input type="submit"/><br/>
+            <a href="index.html">Go Back</a>
+        </form>
+    <sql:setDataSource 
+            var="snapshot" 
+            url="jdbc:mysql://localhost:3306/Guestbook?zeroDateTimeBehavior=convertToNull"
+            user="root" password=""
+            driver="com.mysql.jdbc.Driver"/>
+    <c:choose>
+        <c:when test="${not empty param.email}">
+    
+        <sql:query dataSource="${snapshot}" var="result">
+            SELECT * FROM Guestbook WHERE Email = ? 
+            <sql:param value="${param.email}" />
+        </sql:query>
+            
+            <table border="1" width="100%">
+<tr>
+   <th>First Name</th>
+   <th>Last Name</th>
+   <th>Email</th>
+   <th>Message</th>
+</tr>
+<!--Loop Through result.rows array-->
+<c:forEach var="row" items="${result.rows}">
+<tr>
+   <td><c:out value="${result.rows[0].FirstName}"/></td>
+   <td><c:out value="${result.rows[0].LastName}"/></td>
+   <td><c:out value="${result.rows[0].Email}"/></td>
+   <td><c:out value="${result.rows[0].Message}"/></td>
+</tr>
+</c:forEach>
+</table>
+            Press DELETE button confirm deletion
+            <form id="deleterecord" action="delete2.jsp" method="GET"> 
+                <input type="submit" value="DELETE" />
+                <input type="hidden" name="id" id="id" value="${result.rows[0].Id}" />
             </form>
-
+        </c:when>
+    </c:choose>
     </body>
 </html>
