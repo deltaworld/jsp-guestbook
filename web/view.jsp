@@ -3,10 +3,11 @@
     Created on : Jul 17, 2015, 9:03:31 PM
     Author     : tareqfadel
 --%>
+<!--Imports-->
 <%@page import="java.util.*,java.io.*,java.sql.*" %>
 <%@page import="javax.servlet.http.*,javax.servlet.*" %>
 
-<!--Like Namespace-->
+<!--Namespace-->
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -17,12 +18,13 @@
         <title>JSP Page</title>
     </head>
     <body>
+<!--Connect to Database-->
         <sql:setDataSource 
             var="snapshot" 
             url="jdbc:mysql://localhost:3306/Guestbook?zeroDateTimeBehavior=convertToNull"
             user="root" password=""
             driver="com.mysql.jdbc.Driver"/>
-        
+ 
         <sql:query dataSource="${snapshot}" var="result">
             SELECT LastName,FirstName,Email,Message FROM Guestbook;
         </sql:query>
@@ -35,6 +37,7 @@
    <th>Email</th>
    <th>Message</th>
 </tr>
+<!--Loop Through result.rows array-->
 <c:forEach var="row" items="${result.rows}">
 <tr>
    <td><c:out value="${row.FirstName}"/></td>

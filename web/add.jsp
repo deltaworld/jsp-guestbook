@@ -6,37 +6,51 @@
 <%@page import="java.util.*,java.io.*,java.sql.*" %>
 <%@page import="javax.servlet.http.*,javax.servlet.*" %>
 
-<!--Like Namespace-->
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <sql:setDataSource 
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Add A Guestbook Message</title>
+    </head>
+    <body>
+        <h1>Add a Guestbook Message</h1>
+        <form action="add.jsp" method="GET">
+            <label for="fname">First Name</label>
+            <input type="text" name="fname" id="fname" /><br>
+            <label for="sname">Last Name</label>
+            <input type="text" name="sname" id="sname" /><br>
+            <label for="email">email</label>
+            <input type="email" name="email" id="email" /><br>
+            <label for="message">Guestbook Message</label>
+            <textarea name="message" id="message"></textarea>
+            <input type="submit"/><br/>
+            <a href="index.html">Go Back</a>
+        </form>
+    <sql:setDataSource 
             var="snapshot" 
             url="jdbc:mysql://localhost:3306/Guestbook?zeroDateTimeBehavior=convertToNull"
             user="root" password=""
             driver="com.mysql.jdbc.Driver"/>
-        
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <ul>
-    <li><p><b>First Name:</b>
-    <%= request.getParameter("fname")%>
-    </p></li>
-    <li><p><b>Surname:</b>
-   <%= request.getParameter("sname")%></p>
-    </li>
-    <li><p><b>email:</b>
-   <%= request.getParameter("email")%></p>
-    </li>
-    <li><p><b>Message:</b>
-   <%= request.getParameter("message")%></p>
-    </li>
-</ul>
-        
+    <c:choose>
+        <c:when test="${not empty param.fname
+                     && not empty param.sname
+                     && not empty param.email
+                     && not empty param.message}">
+    
+        <sql:update dataSource="${snapshot}" var="result">
+            INSERT INTO Guestbook (LastName, FirstName, Email, Message)
+            VALUES (?, ?, ?, ?);
+            <sql:param value="${param.sname}" />
+            <sql:param value="${param.fname}" />
+            <sql:param value="${param.email}" />
+            <sql:param value="${param.message}" />
+        </sql:update>
+            Record has been added to the database.
+        </c:when>
+            <c:otherwise><br/>Please fill in all fields.</c:otherwise>
+    </c:choose>
+            
     </body>
 </html>
