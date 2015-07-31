@@ -26,13 +26,14 @@
             driver="com.mysql.jdbc.Driver"/>
  
         <sql:query dataSource="${snapshot}" var="result">
-            SELECT LastName,FirstName,Email,Message FROM Guestbook;
+            SELECT LastName,FirstName,Email,Message,Date FROM Guestbook;
         </sql:query>
             <h1>View Database Entries</h1>
             
 <table border="1" width="100%">
 <tr>
-   <th>First Name</th>
+    <th>Date</th>
+    <th>First Name</th>
    <th>Last Name</th>
    <th>Email</th>
    <th>Message</th>
@@ -40,7 +41,8 @@
 <!--Loop Through result.rows array-->
 <c:forEach var="row" items="${result.rows}">
 <tr>
-   <td><c:out value="${row.FirstName}"/></td>
+   <td><c:out value="${row.Date}"/></td>
+    <td><c:out value="${row.FirstName}"/></td>
    <td><c:out value="${row.LastName}"/></td>
    <td><c:out value="${row.Email}"/></td>
    <td><c:out value="${row.Message}"/></td>
