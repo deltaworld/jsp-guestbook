@@ -12,25 +12,45 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+<html lang="en">
+<head>
+  <title>Adobe Guestbook: View</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/libs/jquery-2.1.4.min.js"></script>
+  <script src="js/libs/bootstrap.min.js"></script>
+</head>
+<body>
+    
 <!--Connect to Database-->
-        <sql:setDataSource 
-            var="snapshot" 
-            url="jdbc:mysql://localhost:3306/Guestbook?zeroDateTimeBehavior=convertToNull"
-            user="root" password=""
-            driver="com.mysql.jdbc.Driver"/>
- 
-        <sql:query dataSource="${snapshot}" var="result">
-            SELECT LastName,FirstName,Email,Message,Date FROM Guestbook;
-        </sql:query>
-            <h1>View Database Entries</h1>
+<sql:setDataSource 
+    var="snapshot" user="root" password="" driver="com.mysql.jdbc.Driver"
+    url="jdbc:mysql://localhost:3306/Guestbook?zeroDateTimeBehavior=convertToNull" />
+
+<sql:query dataSource="${snapshot}" var="result">
+    SELECT LastName,FirstName,Email,Message,Date FROM Guestbook;
+</sql:query>
+    <div class="container">
+<div class="row">
+     <div class="col-sm-12">
+        <div class="btn-group btn-group-justified">
+             <a href="index.html" class="btn btn-success">Home</a>
+          <a href="view.jsp" class="btn btn-primary">View</a>
+          <a href="add.jsp" class="btn btn-primary">Add</a>
+          <a href="delete.jsp" class="btn btn-primary">Delete</a>
+          <a href="update.jsp" class="btn btn-primary">Update</a>
+       </div>
+     </div>
+        </div>
+<div class="jumbotron">
+    <h1>View Guestbook Entries</h1>
+      <p>A detailed list of all guestbook entries.</p>
+    </div>            
+        
+       
             
-<table border="1" width="100%">
+<table border="1" width="100%" class="table-hover table table-striped">
 <tr>
     <th>Date</th>
     <th>First Name</th>
@@ -49,7 +69,6 @@
 </tr>
 </c:forEach>
 </table>
-            
-<a href="index.html">Go Back</a>
+</div>        
 </body>
 </html>
