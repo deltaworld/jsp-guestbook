@@ -20,6 +20,9 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <script src="js/libs/jquery-2.1.4.min.js"></script>
   <script src="js/libs/bootstrap.min.js"></script>
+  <script src="js/jquery-dateFormat.min.js"></script>
+  <script src="js/format-date.js"></script>
+  
 </head>
 <body>
     
@@ -61,7 +64,7 @@
 <!--Loop Through result.rows array-->
 <c:forEach var="row" items="${result.rows}">
 <tr>
-   <td><c:out value="${row.Date}"/></td>
+   <td class="date"><c:out value="${row.Date}"/></td>
     <td><c:out value="${row.FirstName}"/></td>
    <td><c:out value="${row.LastName}"/></td>
    <td><c:out value="${row.Email}"/></td>
