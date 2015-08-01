@@ -3,6 +3,16 @@
     Created on : Jul 17, 2015, 9:03:54 PM
     Author     : tareqfadel
 --%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Delete A Guestbook Record</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/libs/jquery-2.1.4.min.js"></script>
+  <script src="js/libs/bootstrap.min.js"></script>
+
 <%@page import="java.util.*,java.io.*,java.sql.*" %>
 <%@page import="javax.servlet.http.*,javax.servlet.*" %>
 
@@ -11,21 +21,44 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Delete a Guestbook Entry</title>
-    </head>
+<style>
+      .bs-form {
+          margin:20px 0;
+      }
+      #email {
+          width:300px;
+      }
+  </style>    
+</head>
     <body>
-<h1>Delete a Record</h1>
+<div class="container">
+    <div class="row">
+     <div class="col-sm-12">
+        <div class="btn-group btn-group-justified">
+          <a href="index.html" class="btn btn-success">Home</a>
+          <a href="view.jsp" class="btn btn-primary">View</a>
+          <a href="add.jsp" class="btn btn-primary">Add</a>
+          <a href="delete.jsp" class="btn btn-primary">Delete</a>
+          <a href="update.jsp" class="btn btn-primary">Update</a>
+       </div>
+     </div>
+    </div>
+    <div class="jumbotron">
+    <h1>Delete a Guestbook Entry</h1>
+    <p>Delete a guestbook entry by using email as the identifier.</p>
+    </div>            
         
-        Please Enter the email address of the record you wish to delete
-            <form action="delete.jsp" method="GET">
-            <label for="email">email address:</label>
-            <input type="text" name="email" id="email" />
-            <input type="submit"/><br/>
-            <a href="index.html">Go Back</a>
+    <p>Please enter the email address of the record you wish to delete</p>
+            <form action="delete.jsp" method="GET" class="form-inline bs-form" 
+                  role="form">
+                
+                <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" name="email" id="email" class="form-control" 
+                       required="required" placeholder="Enter email" />
+                </div>
+                <button type="submit" class="btn btn-primary">Delete Entry</button>
+            
         </form>
     <sql:setDataSource 
             var="snapshot" 
@@ -40,7 +73,7 @@
             <sql:param value="${param.email}" />
         </sql:query>
             
-            <table border="1" width="100%">
+            <table border="1" width="100%" class="table-hover table table-striped">
 <tr>
    <th>First Name</th>
    <th>Last Name</th>
@@ -57,12 +90,13 @@
 </tr>
 </c:forEach>
 </table>
-            Press DELETE button confirm deletion
             <form id="deleterecord" action="delete2.jsp" method="GET"> 
-                <input type="submit" value="DELETE" />
+                
+                 <button type="submit" class="btn btn-danger">DELETE</button>
                 <input type="hidden" name="id" id="id" value="${result.rows[0].Id}" />
             </form>
         </c:when>
     </c:choose>
+</div>
     </body>
 </html>
