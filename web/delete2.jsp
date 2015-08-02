@@ -46,9 +46,11 @@
             driver="com.mysql.jdbc.Driver"/>
 <sql:update dataSource="${snapshot}" var="result">
             DELETE FROM Guestbook WHERE Id = ?
+            
             <sql:param value="${param.id}" />
         </sql:update>
-        <h1>Record has been deleted</h1>
+        
+            <h1>Record has been deleted</h1>
         
 </div>    
 </body>

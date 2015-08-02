@@ -57,23 +57,23 @@
         <form action="add.jsp" method="GET">
             
             <div class="form-group">
-                <label for="fname">First Name</label>
+                <label for="fname">First Name:</label>
                 <input type="text" name="fname" id="fname" class="form-control" 
                        placeholder="First Name" required="required"/>
             </div>
             <div class="form-group">
-                <label for="sname">Last Name</label>
+                <label for="sname">Last Name:</label>
                 <input type="text" name="sname" id="sname" class="form-control"
                        placeholder="Last Name" required="required"/>
             </div>
             <div class="form-group">
-                <label for="email">email</label>
+                <label for="email">Email:</label>
                 <input type="email" name="email" id="email" class="form-control"
                        placeholder="email" required="required"/>
             </div>
             
             <div class="form-group">
-            <label for="message">Guestbook Message</label>
+            <label for="message">Guestbook Message:</label>
             <textarea name="message" id="message" class="form-control"
                       placeholder="Please leave a message" required="required"></textarea>
             </div>

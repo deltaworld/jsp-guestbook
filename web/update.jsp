@@ -12,20 +12,65 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Update Record</h1>
+<html lang="en">
+<head>
+  <title>Adobe Guestbook: Update</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <script src="js/libs/jquery-2.1.4.min.js"></script>
+  <script src="js/libs/bootstrap.min.js"></script>
+  <style>
+      .bs-form {
+          margin:20px 0;
+      }
+      #email-l {
+          width:300px;
+      }
+  </style>
+  <script>
+      $(function() {
+        var $find = $('#find');
+        $find.click(function() {
+      });
+        var $message = $('#message');
+        var message = $message.html().trim();
+        $message.text(message);
         
-        Please Enter your email address to update record
-            <form action="update.jsp" method="GET">
-            <label for="email">email address:</label>
-            <input type="text" name="email" id="email" />
-            <input type="submit"/><br/>
-            <a href="index.html">Go Back</a>
+        
+      });
+  </script>
+</head>
+<body>
+    <div class="container">
+<div class="row">
+     <div class="col-sm-12">
+        <div class="btn-group btn-group-justified">
+             <a href="index.html" class="btn btn-success">Home</a>
+          <a href="view.jsp" class="btn btn-primary">View</a>
+          <a href="add.jsp" class="btn btn-primary">Add</a>
+          <a href="delete.jsp" class="btn btn-primary">Delete</a>
+          <a href="update.jsp" class="btn btn-primary">Update</a>
+       </div>
+     </div>
+        </div>
+<div class="jumbotron">
+    <h1>Update a guestbook entry</h1>
+      <p>Modify details for an existing guestbook record.</p>
+    </div>
+        
+        
+        <p>Please enter the email address of the record you wish to update</p>
+        <form action="update.jsp" method="GET" class="form-inline bs-form" 
+              role="form">
+            <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email-l" class="form-control"
+                   required="required" placeholder="Enter email"/>
+            </div>
+            <button type="submit" class="btn btn-primary" id="find">Find Entry</button>
+            
+            
         </form>
     <sql:setDataSource 
             var="snapshot" 
@@ -43,22 +88,39 @@
             
         </c:when>
     </c:choose>
-        <form action="update2.jsp" method="GET">
+            <div class="bs-form">
+        <form action="update2.jsp" method="GET" id="updateform">
             <input type="hidden" name="id" id="id" value="${result.rows[0].Id}" />
-            <label for="fname">First Name</label>
-            <input type="text" name="fname" id="fname" value="${result.rows[0].FirstName}"/><br>
-            <label for="sname">Last Name</label>
-            <input type="text" name="sname" id="sname" value="${result.rows[0].LastName}"/><br>
-            <label for="email">email</label>
-            <input type="email" name="email" id="email" value="${result.rows[0].email}"/><br>
+            <div class="form-group">
+            <label for="fname">First Name:</label>
+            <input type="text" name="fname" id="fname" required="required" 
+                   class="form-control" value="${result.rows[0].FirstName}"/>
+            </div>
+            <div class="form-group">
+            <label for="sname">Last Name:</label>
+            <input type="text" name="sname" id="sname" required="required"
+                   class="form-control" value="${result.rows[0].LastName}"/>
+            </div>
+            <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required="required"
+                   class="form-control" value="${result.rows[0].email}"/>
+            </div>
+            <div class="form-group">
             <label for="message">Guestbook Message</label>
-            <textarea name="message" id="message"><c:out value="${result.rows[0].message}"/></textarea>
-            <input type="submit" value="Update Record"/><br/>
-            <a href="index.html">Go Back</a>
-        </form>
-    
-    
-    
+            <textarea name="message" id="message" required="required" 
+                      class="form-control">
+                <c:out value="${result.rows[0].message}"/>  
             
+            </textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update record</button>
+            
+        </form>
+            </div>
+    
+    
+    
+    </div> 
     </body>
 </html>
