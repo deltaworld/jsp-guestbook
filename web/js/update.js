@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 $(function() {
-    var $j_dates = $(".date");
-
-
-
-
-$j_dates.each( function(i) { 
-    $j_dates[i].innerHTML = 
-            $.format.date($j_dates[i].innerHTML + "00:00:00.000", 
-    "D MMMM yyyy");
+        var $find = $('#find');
+        var $message = $('#message');
+        var message = $message.html().trim();
+        var $updateForm = $('#updateform');
         
-    } );
+        $find.click(function() {    
+         $updateForm.show();
+      }); 
+        $message.text(message);
+        if ($message.html() === "") {
+            $updateForm.hide();
+        }
+      });
 
-})

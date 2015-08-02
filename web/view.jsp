@@ -1,7 +1,7 @@
 <%-- 
     Document   : view
     Created on : Jul 17, 2015, 9:03:31 PM
-    Author     : tareqfadel
+    Author     : Tareq Fadel
 --%>
 <!--Imports-->
 <%@page import="java.util.*,java.io.*,java.sql.*" %>
@@ -58,19 +58,19 @@
     <th>ID</th>
     <th>Date</th>
     <th>First Name</th>
-   <th>Last Name</th>
-   <th>Email</th>
-   <th>Message</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Message</th>
 </tr>
 <!--Loop Through result.rows array-->
 <c:forEach var="row" items="${result.rows}">
 <tr>
-   <td><c:out value="${row.Id}"/></td>
+    <td><c:out value="${row.Id}"/></td>
     <td class="date"><c:out value="${row.Date}"/></td>
     <td><c:out value="${row.FirstName}"/></td>
-   <td><c:out value="${row.LastName}"/></td>
-   <td><c:out value="${row.Email}"/></td>
-   <td><c:out value="${row.Message}"/></td>
+    <td><c:out value="${row.LastName}"/></td>
+    <td><c:out value="${row.Email}"/></td>
+    <td><c:out value="${row.Message}"/></td>
 </tr>
 </c:forEach>
 </table>

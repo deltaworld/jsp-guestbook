@@ -1,12 +1,12 @@
 <%-- 
     Document   : delete
     Created on : Jul 17, 2015, 9:03:54 PM
-    Author     : tareqfadel
+    Author     : Tareq Fadel
 --%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Delete A Guestbook Record</title>
+  <title>Adobe Guestbook: Delete</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -23,8 +23,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 </head>
-    <body>
-<div class="container">
+<body>
+    <sql:setDataSource driver="com.mysql.jdbc.Driver" user="root" password=""
+        url="jdbc:mysql://localhost:3306/Guestbook?zeroDateTimeBehavior=convertToNull"
+        var="snapshot"/>
+    <div class="container">
     <div class="row">
      <div class="col-sm-12">
         <div class="btn-group btn-group-justified">
@@ -33,9 +36,9 @@
           <a href="add.jsp" class="btn btn-primary">Add</a>
           <a href="delete.jsp" class="btn btn-primary">Delete</a>
           <a href="update.jsp" class="btn btn-primary">Update</a>
-       </div>
-     </div>
-    </div>
+       </div> <!-- /btn-group -->
+     </div> <!-- /col-sm-12 -->
+    </div> <!-- /row -->
     <div class="jumbotron">
     <h1>Delete a Guestbook Entry</h1>
     <p>Delete a guestbook entry by using ID as the unique identifier.</p>
@@ -53,43 +56,33 @@
                 <button type="submit" class="btn btn-primary">Delete Entry</button>
             
         </form>
-    <sql:setDataSource 
-            var="snapshot" 
-            url="jdbc:mysql://localhost:3306/Guestbook?zeroDateTimeBehavior=convertToNull"
-            user="root" password=""
-            driver="com.mysql.jdbc.Driver"/>
+    
     <c:choose>
         <c:when test="${not empty param.id}">
-    
-        <sql:query dataSource="${snapshot}" var="result">
-            SELECT * FROM Guestbook WHERE Id = ? 
-            <sql:param value="${param.id}" />
-        </sql:query>
-            
+            <sql:query dataSource="${snapshot}" var="result">
+                SELECT * FROM Guestbook WHERE Id = ? 
+                <sql:param value="${param.id}" />
+            </sql:query>
             <table border="1" width="100%" class="table-hover table table-striped">
-<tr>
-   <th>First Name</th>
-   <th>Last Name</th>
-   <th>Email</th>
-   <th>Message</th>
-</tr>
-<!--Loop Through result.rows array-->
-<c:forEach var="row" items="${result.rows}">
-<tr>
-   <td><c:out value="${result.rows[0].FirstName}"/></td>
-   <td><c:out value="${result.rows[0].LastName}"/></td>
-   <td><c:out value="${result.rows[0].Email}"/></td>
-   <td><c:out value="${result.rows[0].Message}"/></td>
-</tr>
-</c:forEach>
-</table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                </tr>
+                <tr>
+                    <td><c:out value="${result.rows[0].FirstName}"/></td>
+                    <td><c:out value="${result.rows[0].LastName}"/></td>
+                    <td><c:out value="${result.rows[0].Email}"/></td>
+                    <td><c:out value="${result.rows[0].Message}"/></td>
+                </tr>
+            </table>
             <form id="deleterecord" action="delete2.jsp" method="GET"> 
-                
-                 <button type="submit" class="btn btn-danger">DELETE</button>
-                <input type="hidden" name="id" id="id" value="${result.rows[0].Id}" />
+                <button type="submit" class="btn btn-danger">DELETE</button>
+                <input type="hidden" name="idc" id="idc" value="${result.rows[0].Id}" />
             </form>
         </c:when>
     </c:choose>
-</div>
+</div> <!-- /container -->
     </body>
 </html>
