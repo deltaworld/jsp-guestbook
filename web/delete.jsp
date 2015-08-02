@@ -10,6 +10,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/docs.css">
   <script src="js/libs/jquery-2.1.4.min.js"></script>
   <script src="js/libs/bootstrap.min.js"></script>
 
@@ -21,14 +22,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<style>
-      .bs-form {
-          margin:20px 0;
-      }
-      #email {
-          width:300px;
-      }
-  </style>    
 </head>
     <body>
 <div class="container">
@@ -45,17 +38,17 @@
     </div>
     <div class="jumbotron">
     <h1>Delete a Guestbook Entry</h1>
-    <p>Delete a guestbook entry by using email as the identifier.</p>
+    <p>Delete a guestbook entry by using ID as the unique identifier.</p>
     </div>            
         
-    <p>Please enter the email address of the record you wish to delete</p>
+    <p>Please enter the ID of the record you wish to delete</p>
             <form action="delete.jsp" method="GET" class="form-inline bs-form" 
                   role="form">
                 
                 <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="text" name="email" id="email" class="form-control" 
-                       required="required" placeholder="Enter email" />
+                <label for="id">ID:</label>
+                <input type="number" name="id" id="id" class="form-control" 
+                       required="required" placeholder="Enter ID" autofocus="autofocus" />
                 </div>
                 <button type="submit" class="btn btn-primary">Delete Entry</button>
             
@@ -66,11 +59,11 @@
             user="root" password=""
             driver="com.mysql.jdbc.Driver"/>
     <c:choose>
-        <c:when test="${not empty param.email}">
+        <c:when test="${not empty param.id}">
     
         <sql:query dataSource="${snapshot}" var="result">
-            SELECT * FROM Guestbook WHERE Email = ? 
-            <sql:param value="${param.email}" />
+            SELECT * FROM Guestbook WHERE Id = ? 
+            <sql:param value="${param.id}" />
         </sql:query>
             
             <table border="1" width="100%" class="table-hover table table-striped">

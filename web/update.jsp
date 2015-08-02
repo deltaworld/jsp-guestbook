@@ -18,28 +18,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/docs.css">
   <script src="js/libs/jquery-2.1.4.min.js"></script>
   <script src="js/libs/bootstrap.min.js"></script>
-  <style>
-      .bs-form {
-          margin:20px 0;
-      }
-      #email-l {
-          width:300px;
-      }
-  </style>
+  
   <script>
       $(function() {
         var $find = $('#find');
-        $find.click(function() {
-      });
         var $message = $('#message');
         var message = $message.html().trim();
+        var $updateForm = $('#updateform');
+        
+        
+        $find.click(function() {    
+         $updateForm.show();
+      }); 
         $message.text(message);
-        
-        
+        if ($message.html() === "") {
+            $updateForm.hide();
+        }
       });
   </script>
+  <style>
+/*      #updateform {
+          visibility: hidden;
+      }*/
+  </style>
 </head>
 <body>
     <div class="container">
@@ -60,13 +64,13 @@
     </div>
         
         
-        <p>Please enter the email address of the record you wish to update</p>
+        <p>Please enter the ID of the record you wish to update</p>
         <form action="update.jsp" method="GET" class="form-inline bs-form" 
               role="form">
             <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="text" name="email" id="email-l" class="form-control"
-                   required="required" placeholder="Enter email"/>
+            <label for="idq">ID:</label>
+            <input type="number" name="idq" id="idq" class="form-control"
+                   required="required" placeholder="Enter ID" autofocus="autofocus"/>
             </div>
             <button type="submit" class="btn btn-primary" id="find">Find Entry</button>
             
@@ -78,11 +82,11 @@
             user="root" password=""
             driver="com.mysql.jdbc.Driver"/>
     <c:choose>
-        <c:when test="${not empty param.email}">
+        <c:when test="${not empty param.idq}">
     
         <sql:query dataSource="${snapshot}" var="result">
-            SELECT * FROM Guestbook WHERE Email = ? 
-            <sql:param value="${param.email}" />
+            SELECT * FROM Guestbook WHERE Id = ? 
+            <sql:param value="${param.idq}" />
         </sql:query>
             
             

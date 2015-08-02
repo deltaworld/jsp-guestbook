@@ -32,7 +32,7 @@
     url="jdbc:mysql://localhost:3306/Guestbook?zeroDateTimeBehavior=convertToNull" />
 
 <sql:query dataSource="${snapshot}" var="result">
-    SELECT LastName,FirstName,Email,Message,Date FROM Guestbook;
+    SELECT * FROM Guestbook;
 </sql:query>
     <div class="container">
 <div class="row">
@@ -55,6 +55,7 @@
             
 <table border="1" width="100%" class="table-hover table table-striped">
 <tr>
+    <th>ID</th>
     <th>Date</th>
     <th>First Name</th>
    <th>Last Name</th>
@@ -64,7 +65,8 @@
 <!--Loop Through result.rows array-->
 <c:forEach var="row" items="${result.rows}">
 <tr>
-   <td class="date"><c:out value="${row.Date}"/></td>
+   <td><c:out value="${row.Id}"/></td>
+    <td class="date"><c:out value="${row.Date}"/></td>
     <td><c:out value="${row.FirstName}"/></td>
    <td><c:out value="${row.LastName}"/></td>
    <td><c:out value="${row.Email}"/></td>
