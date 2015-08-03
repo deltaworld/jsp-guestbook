@@ -6,3 +6,5 @@ src/conf/
 # netbeans
 /nbproject
 /dist/
+
+~*
